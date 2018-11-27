@@ -1,0 +1,71 @@
+import viajes.*
+import socios.*
+
+describe "test Viajes"{
+	var ciudadNorm = new ExcursionAUnaCiudad(cantDeAtracciones= 4)
+	var ciudadTropi = new ExcursionACiudadTropical(cantDeAtracciones = 4)
+	var ciudadNorm2 =  new ExcursionAUnaCiudad(cantDeAtracciones= 8)
+	var ciudadTropi2 = new ExcursionACiudadTropical(cantDeAtracciones = 8)
+	var ciudadTropi3 = new ExcursionACiudadTropical(cantDeAtracciones = 10)
+	
+	var salida1 = new SalidaDeTrekking(kilometrosDeSenderosParaRecorrer=100,cantDeDiasDeSol=130)
+	var salida2 =  new SalidaDeTrekking(kilometrosDeSenderosParaRecorrer=50,cantDeDiasDeSol=240)
+	var salida3 =  new SalidaDeTrekking(kilometrosDeSenderosParaRecorrer=250,cantDeDiasDeSol=130)
+	
+	var socio1 = new Socios(actividades =[ciudadTropi,ciudadTropi2],cantMaximaDeActividades = 2)
+	
+	test "excursion a ciudad normal"{
+	assert.equals(2,ciudadNorm.diasDeActividad())
+	assert.equals(false,ciudadNorm.implicaEsfuerzo())
+	assert.equals(false,ciudadNorm.sirveParaBroncearse())
+	}
+	
+	test "excursion a una ciudad tropical"{
+		assert.equals(3,ciudadTropi.diasDeActividad())
+		assert.equals(false,ciudadTropi.implicaEsfuerzo())
+		assert.equals(true, ciudadTropi.sirveParaBroncearse())
+	}
+	
+	test "excursion a una ciudad normal ejemplo 3"{
+		assert.equals(4,ciudadNorm2.diasDeActividad())
+		assert.equals(true,ciudadNorm2.implicaEsfuerzo())
+		assert.equals(false,ciudadNorm2.sirveParaBroncearse())
+	}
+	
+	test "excursion a una ciudad tropical ejemlo 4"{
+		assert.equals(5,ciudadTropi2.diasDeActividad())
+		assert.equals(true,ciudadNorm2.implicaEsfuerzo())
+		assert.equals(true,ciudadTropi2.sirveParaBroncearse())
+	}
+	
+	test "excursion a una ciudad tropical ejemplo5"{
+		assert.equals(6,ciudadTropi3.diasDeActividad())
+		assert.equals(true, ciudadTropi3.implicaEsfuerzo())
+		assert.equals(true,ciudadTropi3.sirveParaBroncearse())
+		
+	}
+	
+	test "salida de trekking ejemplo 1"{
+		assert.equals(2,salida1.diasDeActividad())
+		assert.equals(true,salida1.implicaEsfuerzo())
+		assert.equals(false,salida1.sirveParaBroncearse())
+	}
+	
+	test "salida de trekking ejemplo 2"{
+		assert.equals(1,salida2.diasDeActividad())
+		assert.equals(false,salida2.implicaEsfuerzo())
+		assert.equals(true,salida2.sirveParaBroncearse())
+	}
+	test "salida de trekking ejemplo 3"{
+		assert.equals(5,salida3.diasDeActividad())
+		assert.equals(true,salida3.implicaEsfuerzo())
+		assert.equals(true,salida3.sirveParaBroncearse())
+	}
+	
+	test "es adorador del sol"{
+		assert.equals(true,socio1.esAdoradorDelSol())
+	}
+	test "las actividades que implican esfuerzo"{
+		assert.equals([ciudadTropi2],socio1.actividadesEsforzadas())
+	}
+}
