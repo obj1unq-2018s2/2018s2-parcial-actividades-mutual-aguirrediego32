@@ -24,6 +24,7 @@ class Socios{
 	}
 	
 	method yaRealizoActividad(actividad){
+		// TODO Debería ser con () esto significa otra cosa y no es correcto.
 		return actividades.contains{actividad}
 	}
 }

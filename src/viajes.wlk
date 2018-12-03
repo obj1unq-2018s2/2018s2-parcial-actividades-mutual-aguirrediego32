@@ -1,6 +1,8 @@
 import socios.*
 class Viajes {
 	var property idiomas = ["espaniol"]
+	
+	// TODO Estos tres atributos no tienen utilidad, dado que cada subclase debe definir su propio criterio.
 	var property implicaEsfuerzo = false
 	var property sirveParaBroncearse = false
 	var property diasDeActividad = 2
@@ -10,6 +12,7 @@ class Viajes {
 	}
 	
 	method leAtraeAlSocio(socio){
+		// TODO Esto debería devolver un booleano y está devolviendo el tipo de socio.
 	return socio.tipoSocio()
 	}
 
@@ -18,6 +21,7 @@ class Viajes {
 			and socio.yaRealizoActividad(self)
 	}
 }
+
 class ViajesDePlaya inherits Viajes{
 	var property largoDePlaya
 	
@@ -79,6 +83,7 @@ class SalidaDeTrekking inherits Viajes{
 }
 
 class Gimnasia inherits Viajes{
+	// Por qué acá usás una lista y en la superclase un conjunto?
 	override method idiomas()= ["espaniol"]
 	
 	override method diasDeActividad()= 1

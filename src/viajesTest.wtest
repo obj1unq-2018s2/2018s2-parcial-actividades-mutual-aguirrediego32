@@ -12,6 +12,8 @@ describe "test Viajes"{
 	var salida2 =  new SalidaDeTrekking(kilometrosDeSenderosParaRecorrer=50,cantDeDiasDeSol=240)
 	var salida3 =  new SalidaDeTrekking(kilometrosDeSenderosParaRecorrer=250,cantDeDiasDeSol=130)
 	
+	// TODO Problemas al instanciar objetos, le estás pasando todos los parámetros que tienen valores por defecto 
+	// (que podrían no estar) y no le pasás justo el que no tiene valor por defecto (que es indispensable para el funcionamiento correcto).
 	var socio1 = new Socios(actividades =[ciudadTropi,ciudadTropi2],cantMaximaDeActividades = 2)
 	
 	test "excursion a ciudad normal"{
