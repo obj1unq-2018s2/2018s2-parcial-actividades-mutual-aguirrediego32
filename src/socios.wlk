@@ -1,51 +1,62 @@
 import viajes.*
 
+class Socio {
 
-class Socios{
-	var property actividades =[]
-	var property cantMaximaDeActividades = 2
+	const cantMaximaDeActividades
+	const actividades = []
+	const idiomas = [ "espaniol", "ingles" ]
+
 	var property edad = 25
-	var property idiomas=["espaniol","ingles"]
-	var tipoDeSocio // objeto socio
-	
-	
-	method esAdoradorDelSol(){
-	return	self.actividades().all{actividad=>actividad.sirveParaBroncearse()}
+
+	method esAdoradorDelSol() {
+		return actividades.all{ actividad => actividad.sirveParaBroncearse() }
 	}
-	
-	method actividadesEsforzadas(){
-		return self.actividades().filter{actividad=>actividad.implicaEsfuerzo()}
+
+	method actividadesEsforzadas() {
+		return actividades.filter{ actividad => actividad.implicaEsfuerzo() }
 	}
-	
-	method registrarActividad(actividad){
-		if( actividades.size() >= cantMaximaDeActividades ){
-			self.error("supera el maximo de actividades maximas")}  
-			else{ actividades.add(actividad)} 
+
+	method registrarActividad(actividad) {
+		if (actividades.size() >= cantMaximaDeActividades) {
+			self.error("supera el maximo de actividades maximas")
+		}
+		
+		actividades.add(actividad)
 	}
-	
-	method yaRealizoActividad(actividad){
-		// TODO Debería ser con () esto significa otra cosa y no es correcto.
-		return actividades.contains{actividad}
+
+	method leAtrae(actividad)
+
+	method yaRealizoActividad(actividad) {
+		return actividades.contains(actividad)
 	}
+
 }
 
-object socioTranquilo{
-	method leAtraeAlSocio(actividad){
-		return actividad.diasDeActividad()> 4
+class SocioTranquilo inherits Socio {
+
+	override method leAtrae(actividad) {
+		return actividad.diasDeActividad() > 4
 	}
+
 }
 
-object socioCoherente{
-	method leAtraeAlSocio(actividad,socio){
-		   return socio.esAdoradorDelSol() and actividad.sirveParaBroncearse() 
-		   			or actividad.implicaEsfuerzo()
-	}
-}	
+class SocioCoherente inherits Socio {
 
-object socioRelajado{
-	method leAtraeAlSocio(actividad,socio){
-		return actividad.idiomas().any{socio.idiomas()}
+	override method leAtrae(actividad) {
+		if (self.esAdoradorDelSol()) {
+			return actividad.sirveParaBroncearse() 
+		} else {
+			return actividad.implicaEsfuerzo()	
+		}
 	}
+
 }
 
+class SocioRelajado inherits Socio {
+
+	method leAtraeAlSocio(actividad) {
+		return actividad.idiomas().any { idioma => idiomas.contains(idioma) }
+	}
+
+}
 
